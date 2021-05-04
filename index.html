@@ -1,0 +1,126 @@
+<!DOCTYPE HTML>
+<title>DevPad</title>
+
+<style type="text/css">
+
+noscript {
+
+color: red;
+font-size: large;
+margin-top: 1rem;
+margin-bottom: 1rem;
+display:block;
+
+}
+
+@media (prefers-color-scheme: light) {
+body {
+    justify-content: center;
+    text-align: center;
+    background-color: #bebebe;
+    color: black;
+    margin:0 auto;
+
+    }
+      a {
+      color: black;
+      }
+      
+      a:visited {
+      color: black;
+      }
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        justify-content: center;
+        text-align: center;
+        background-color: #464545;
+        color: white;
+
+    }
+      a {
+      color: white;
+      }
+      
+      a:visited {
+      color: white;
+      }
+    }
+
+</style>
+
+<body>
+<div align="left">
+<center>
+<noscript><h3>[!] Enable Scripting to Continue</h3></noscript>
+
+<script>
+function Alert()
+{
+alert("OK");
+prompt("OK");
+}
+</script>
+
+<script>
+function Nav()
+{
+alert(navigator.appName + " " +  navigator.appVersion);
+
+}
+
+function ConsoleLog(){
+
+console.log(document.getElementById('text').value)
+
+}
+
+function Save(){
+
+    var a = document.createElement("a");
+          a.href = URL.createObjectURL(new Blob([document.getElementById('text').value], {
+          type: "application/text"
+          }));
+
+        a.setAttribute("download", "export.txt");
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+
+}
+
+function Compile()
+{
+alert("To return, please refresh the page");
+document.write(document.getElementById('text').value);
+}
+
+</script>
+
+<form>
+    <input type="button" value="Test Browser Msgs" onclick="Alert()" >
+    <input type="button" value="Exit" onclick="window.close()" >
+    <input type="button" value="Refresh" onclick="location.reload()" >
+    <input type="button" value="Navigator" onclick="Nav()" >
+    <input type="button" value="Console Log" onclick="ConsoleLog()" >
+    <input type="button" value="Save" onclick="Save()" >
+    <input type="button" value="Compile" onclick="Compile()"/></input>
+    </form>
+<textarea autofocus ="true" name="text" rows="45" cols="80" id="text"></textarea>
+
+
+
+</body>
+<br/>
+<script type="text/javascript">
+
+</script>
+
+
+
+</div>
+
+</center>
+</html>
+
