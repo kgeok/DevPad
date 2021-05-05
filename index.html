@@ -28,22 +28,39 @@ padding: 10px;
 margin:0 auto;
 }
 
-input {
+input[type=button], input[type=submit] {
 font-family: 'Segoe UI', Verdana, sans-serif;
 background-color: white;
 border-radius: 5px;
 border: none;
+text-align: center;
 padding: 5px;
 
 }
-input:active {
+input[type=button]:active, input[type=submit]:active {
 font-family: 'Segoe UI', Verdana, sans-serif;
 background-color: rgb(161, 160, 160);
 border-radius: 5px;
 border: none;
+text-align: center;
 padding: 5px;
 
 }
+
+input[type=color] {
+font-family: 'Segoe UI', Verdana, sans-serif;
+border-radius: 5px;
+border: none;
+text-align: center;
+
+}
+input[type=color]:active {
+font-family: 'Segoe UI', Verdana, sans-serif;
+border-radius: 5px;
+border: none;
+
+}
+
 
 @media (prefers-color-scheme: light) {
 body {
@@ -61,6 +78,13 @@ body {
       a:visited {
       color: black;
       }
+
+      textarea {
+      color:black;
+      background-color: white;
+
+    }
+
 }
 
 @media (prefers-color-scheme: dark) {
@@ -78,7 +102,17 @@ body {
       a:visited {
       color: white;
       }
+
+      textarea {
+      color:white;
+      background-color: #252525;
+      font-size: 12px;
+
     }
+
+    }
+
+
 
 </style>
 
@@ -88,13 +122,16 @@ body {
 <noscript><h3>[!] Enable Scripting to Continue</h3></noscript>
 <br/>
 <section>
+    <input type="button" value="About" onclick="About()" >
     <input type="submit" value="Open" onclick='document.getElementById("fileSelect").click()'/>
     <input type="file" id="fileSelect" accept="application/text" style="display:none" onchange='ImportFile()' />
     <input type="button" value="Save" onclick="Save()" >
     <input type="button" value="Exit" onclick="window.close()" >
     <input type="button" value="Refresh" onclick="location.reload()" >
-    <input type="button" value="Navigator" onclick="Nav()" >
-    <input type="button" value="Test Browser Msgs" onclick="Alert()" >
+    <input type="button" value="+" onclick='fontsize("+")' >
+    <input type="button" value="O" onclick='fontsize("O")' >
+    <input type="button" value="-" onclick='fontsize("-")' >
+    <input type="color" id='color' onblur='fontcolor()' >
     <input type="button" value="Console Log" onclick="ConsoleLog()" >
     <input type="button" value="Compile" onclick="Compile()"/></input>
 </section>
@@ -102,7 +139,7 @@ body {
 <textarea autofocus ="true" name="text" rows="45" cols="80" id="text"></textarea>
 
 <script>
-  function Alert()
+  function Test()
   {
   alert("OK");
   prompt("OK");
@@ -110,16 +147,43 @@ body {
   </script>
   
   <script>
-  function Nav()
+  function About()
   {
+  alert("DevPad, Version 0.3, Created by Kevin George");
   alert(navigator.appName + " " +  navigator.appVersion);
   
   }
-  
+  document.get
   function ConsoleLog(){
   
   console.log(document.getElementById('text').value)
   
+  }
+
+  function fontsize(size){
+
+    if (size == "O"){
+      console.log("O");
+      document.getElementById("text").style.fontSize = '100%';
+      }
+
+    if (size == "+"){
+      console.log("+");
+      document.getElementById("text").style.fontSize = 'larger';
+
+    }
+
+    if (size == "-"){
+      console.log("-");
+      document.getElementById("text").style.fontSize = 'smaller';
+
+  }
+
+  }
+  function fontcolor() {
+    console.log("Changing to: " + document.getElementById("color").value);
+    document.getElementById("text").style.color = document.getElementById("color").value;
+
   }
   
   function ImportFile(){
