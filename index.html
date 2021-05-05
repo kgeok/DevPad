@@ -28,6 +28,23 @@ padding: 10px;
 margin:0 auto;
 }
 
+input {
+font-family: 'Segoe UI', Verdana, sans-serif;
+background-color: white;
+border-radius: 5px;
+border: none;
+padding: 5px;
+
+}
+input:active {
+font-family: 'Segoe UI', Verdana, sans-serif;
+background-color: rgb(161, 160, 160);
+border-radius: 5px;
+border: none;
+padding: 5px;
+
+}
+
 @media (prefers-color-scheme: light) {
 body {
     justify-content: center;
@@ -71,14 +88,14 @@ body {
 <noscript><h3>[!] Enable Scripting to Continue</h3></noscript>
 <br/>
 <section>
+    <input type="submit" value="Open" onclick='document.getElementById("fileSelect").click()'/>
+    <input type="file" id="fileSelect" accept="application/text" style="display:none" onchange='ImportFile()' />
+    <input type="button" value="Save" onclick="Save()" >
     <input type="button" value="Exit" onclick="window.close()" >
     <input type="button" value="Refresh" onclick="location.reload()" >
     <input type="button" value="Navigator" onclick="Nav()" >
     <input type="button" value="Test Browser Msgs" onclick="Alert()" >
     <input type="button" value="Console Log" onclick="ConsoleLog()" >
-    <input type="submit" value="Open" onclick='document.getElementById("fileSelect").click()'/>
-    <input type="file" id="fileSelect" accept="application/text" style="display:none" onchange='ImportFile()' />
-    <input type="button" value="Save" onclick="Save()" >
     <input type="button" value="Compile" onclick="Compile()"/></input>
 </section>
 <br/>
