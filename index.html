@@ -140,6 +140,15 @@ body {
 <br/>
 <textarea autofocus ="true" name="text" rows="45" cols="80" id="text"></textarea>
 
+<script type="module">
+
+import 'https://cdn.jsdelivr.net/npm/@pwabuilder/pwaupdate';
+
+const el = document.createElement('pwa-update');
+document.body.appendChild(el);
+
+</script>
+
 <script>
   var version = "0.4";
 
