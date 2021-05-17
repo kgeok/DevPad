@@ -134,31 +134,74 @@ body {
     <input type="button" value="O" onclick='fontsize("O")' >
     <input type="button" value="-" onclick='fontsize("-")' >
     <input type="color" id='color' onblur='fontcolor()' >
-    <input type="button" value="Console Log" onclick="ConsoleLog()" >
+    <input type="button" value="Math" onclick="MathCmd()" >
     <input type="button" value="Compile" onclick="Compile()"/></input>
 </section>
 <br/>
 <textarea autofocus ="true" name="text" rows="45" cols="80" id="text"></textarea>
 
 <script>
-  function Test()
-  {
-  alert("OK");
-  prompt("OK");
-  }
-  </script>
-  
-  <script>
+  var version = "0.4";
+
   function About()
   {
-  alert("DevPad, Version 0.3, Created by Kevin George");
+  alert("DevPad, Version " + version + ", Created by Kevin George");
   alert(navigator.appName + " " +  navigator.appVersion);
   
   }
-  document.get
-  function ConsoleLog(){
+
+  function MathCmd(){
   
-  console.log(document.getElementById('text').value)
+   var numbers = document.getElementById('text').value;
+   var numbersString = document.getElementById('text').toString(10);
+   var breaks = (numbers.match(/\n/g)||[]).length;
+   var infill = numbers.split("\n");
+   var result;
+
+  var cmd = prompt("Please enter the operation you would like to use", "add, subtract, multiply, divide");
+
+  switch (cmd){
+
+    case "add":
+      result = Number(infill[0]);
+      for (i = 1; i < breaks + 1; i++){
+      result = result + Number(infill[i]);
+      }
+
+      prompt("Result", result);
+
+      break;
+
+      case "subtract":
+      result = Number(infill[0]);
+      for (i = 1; i < breaks + 1; i++){
+      result = result - Number(infill[i]);
+      }
+
+      prompt("Result", result);
+      break;
+
+      case "multiply":
+      result = Number(infill[0]);
+      for (i = 1; i < breaks + 1; i++){
+      result = result * Number(infill[i]);
+      }
+
+      prompt("Result", result);
+      break;
+
+      case "divide":
+      result = Number(infill[0]);
+      for (i = 1; i < breaks + 1; i++){
+      result = result / Number(infill[i]);
+      }
+      prompt("Result", result);
+      break;
+
+    default:
+      
+      break;
+  }
   
   }
 
@@ -212,7 +255,6 @@ body {
           document.body.appendChild(a);
           a.click();
           document.body.removeChild(a);
-  
   }
   
   function Compile()
@@ -226,11 +268,7 @@ body {
 </body>
 <br/>
 
-
-
-
 </div>
 
 </center>
 </html>
-
