@@ -1,6 +1,6 @@
 {
-    "name": "",
-    "short_name": "",
+    "name": "DevPad",
+    "short_name": "DevPad",
     "icons": [
         {
             "src": "/icons/android-chrome-192x192.png",
