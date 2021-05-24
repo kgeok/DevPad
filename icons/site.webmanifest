@@ -1,5 +1,8 @@
 {
     "name": "DevPad",
+    "orientation": "any",
+    "description": "A simple HTML/JS in-browser code compiler",
+    "categories": ["utilities"],
     "short_name": "DevPad",
     "icons": [
         {
