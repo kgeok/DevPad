@@ -19,5 +19,6 @@
     "theme_color": "#da532c",
     "background_color": "#da532c",
     "start_url": "https://kgeok.github.io/DevPad/",
-    "display": "standalone"
+    "display": "standalone",
+    "lang": "en-US"
 }
