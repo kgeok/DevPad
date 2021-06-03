@@ -140,12 +140,54 @@ body {
 <noscript><h3>[!] Enable Scripting to Continue</h3></noscript>
 <br/>
 <section>
-    <input type="button" value="About" onclick="About()" >
-    <input type="submit" value="Open" onclick='document.getElementById("fileSelect").click()'/>
+
+  <select id="file_menu" name="file_menu">
+    <option selected>File</option>
+    <option>Copy</option>
+    <option>Open</option>
+    <option>Save</option>
+    <option>Refresh</option>
+    <option>About</option>
+    <option>Exit</option>
+    </select>
+    <script>
+    
+    document.getElementById("file_menu").onchange = function(){
+
+    if (document.getElementById("file_menu").value == "Copy"){
+      Copy();
+    document.getElementById("file_menu").value = "File";
+    }
+    
+    if (document.getElementById("file_menu").value == "Open"){
+      document.getElementById("fileSelect").click();
+    document.getElementById("file_menu").value = "File";
+    }
+
+    if (document.getElementById("file_menu").value == "Save"){
+      Save();
+    document.getElementById("file_menu").value = "File";
+    }
+
+    if (document.getElementById("file_menu").value == "Refresh"){
+      location.reload();
+    document.getElementById("file_menu").value = "File";
+    }
+
+    if (document.getElementById("file_menu").value == "About"){
+      About();
+    document.getElementById("file_menu").value = "File";
+    }
+
+    if (document.getElementById("file_menu").value == "Exit"){
+      window.close();
+    document.getElementById("file_menu").value = "File";
+    }
+
+    }
+    </script>
+    
     <input type="file" id="fileSelect" accept="application/text" style="display:none" onchange='ImportFile()' />
-    <input type="button" value="Save" onclick="Save()" >
-    <input type="button" value="Exit" onclick="window.close()" >
-    <input type="button" value="Refresh" onclick="location.reload()" >
     <input type="button" value="+" onclick='fontsize("+")' >
     <input type="button" value="O" onclick='fontsize("O")' >
     <input type="button" value="-" onclick='fontsize("-")' >
@@ -183,7 +225,7 @@ document.body.appendChild(el);
 </script>
 
 <script>
-  var version = "0.5";
+  var version = "0.6";
 
   function About()
   {
@@ -282,6 +324,14 @@ document.body.appendChild(el);
   function fontcolor() {
     console.log("Changing to: " + document.getElementById("color").value);
     document.getElementById("text").style.color = document.getElementById("color").value;
+
+  }
+
+  function Copy(){
+
+    document.getElementById("text").select();
+    document.getElementById("text").setSelectionRange(0, 99999);
+    document.execCommand("copy");
 
   }
   
