@@ -144,6 +144,7 @@ body {
   <select id="file_menu" name="file_menu">
     <option selected>File</option>
     <option>Copy</option>
+    <option>Clear</option>
     <option>Open</option>
     <option>Save</option>
     <option>Refresh</option>
@@ -156,6 +157,11 @@ body {
 
     if (document.getElementById("file_menu").value == "Copy"){
       Copy();
+    document.getElementById("file_menu").value = "File";
+    }
+
+    if (document.getElementById("file_menu").value == "Clear"){
+      Clear();
     document.getElementById("file_menu").value = "File";
     }
     
@@ -225,12 +231,18 @@ document.body.appendChild(el);
 </script>
 
 <script>
-  var version = "0.6";
+  var version = "0.7";
+
+  document.getElementById("text").onkeypress= function(){
+
+    console.log(document.getElementById("text").value);
+
+  }
+
 
   function About()
   {
-  alert("DevPad, Version " + version + ", Created by Kevin George");
-  alert(navigator.appName + " " +  navigator.appVersion);
+  alert("DevPad, Version " + version + ", Created by Kevin George\n \n" + navigator.appName + " " +  navigator.appVersion);
   
   }
 
@@ -332,6 +344,12 @@ document.body.appendChild(el);
     document.getElementById("text").select();
     document.getElementById("text").setSelectionRange(0, 99999);
     document.execCommand("copy");
+
+  }
+
+  function Clear(){
+
+    document.getElementById("text").value = "";
 
   }
   
