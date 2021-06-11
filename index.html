@@ -143,8 +143,6 @@ body {
 
   <select id="file_menu" name="file_menu">
     <option selected>File</option>
-    <option>Copy</option>
-    <option>Clear</option>
     <option>Open</option>
     <option>Save</option>
     <option>Refresh</option>
@@ -155,15 +153,6 @@ body {
     
     document.getElementById("file_menu").onchange = function(){
 
-    if (document.getElementById("file_menu").value == "Copy"){
-      Copy();
-    document.getElementById("file_menu").value = "File";
-    }
-
-    if (document.getElementById("file_menu").value == "Clear"){
-      Clear();
-    document.getElementById("file_menu").value = "File";
-    }
     
     if (document.getElementById("file_menu").value == "Open"){
       document.getElementById("fileSelect").click();
@@ -194,10 +183,61 @@ body {
     </script>
     
     <input type="file" id="fileSelect" accept="application/text" style="display:none" onchange='ImportFile()' />
-    <input type="button" value="+" onclick='fontsize("+")' >
-    <input type="button" value="O" onclick='fontsize("O")' >
-    <input type="button" value="-" onclick='fontsize("-")' >
-    <input type="color" id='color' onblur='fontcolor()' >
+
+    <select id="edit_menu" name="edit_menu">
+      <option selected>Edit</option>
+      <option>Copy</option>
+      <option>Clear</option>
+      </select>
+      <script>
+      
+      document.getElementById("edit_menu").onchange = function(){
+  
+      if (document.getElementById("edit_menu").value == "Copy"){
+        Copy();
+      document.getElementById("edit_menu").value = "Edit";
+      }
+  
+      if (document.getElementById("edit_menu").value == "Clear"){
+        Clear();
+      document.getElementById("edit_menu").value = "Edit";
+      }
+      
+  
+      }
+      </script>
+
+  <select id="view_menu" name="view_menu">
+  <option selected>View</option>
+  <option>Zoom In</option>
+  <option>Standard</option>
+  <option>Zoom Out</option>
+  </select>
+  <script>
+  
+  document.getElementById("view_menu").onchange = function(){
+
+  if (document.getElementById("view_menu").value == "Zoom In"){
+    fontsize("+")
+  document.getElementById("view_menu").value = "View";
+  }
+
+  if (document.getElementById("view_menu").value == "Standard"){
+    fontsize("O")
+  document.getElementById("view_menu").value = "View";
+  }
+
+
+  if (document.getElementById("view_menu").value == "Zoom Out"){
+    fontsize("-")
+  document.getElementById("view_menu").value = "View";
+  }
+  
+
+  }
+  </script>
+
+    
 
   <select id="math_picker" name="math_picker">
     <option>Math</option>
@@ -216,6 +256,8 @@ body {
     }
     
     </script>
+
+    <input type="color" id='color' onblur='fontcolor()' >
     <input type="button" value="Compile" onclick="Compile()"/></input>
 </section>
 <br/>
