@@ -273,9 +273,19 @@ document.body.appendChild(el);
 <script>
   var version = "0.7";
 
+  document.getElementById("text").onload= function(){
+    
+    console.log(decodeURIComponent(document.cookie));
+
+    document.getElementById("text").value = decodeURIComponent(document.cookie);
+
+  }
+
   document.getElementById("text").onkeypress= function(){
 
     console.log(document.getElementById("text").value);
+
+    document.cookie = "text=" + document.getElementById("text").value + ";";
 
   }
 
