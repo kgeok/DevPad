@@ -272,7 +272,7 @@ document.body.appendChild(el);
 
 <script>
   var version = "0.7";
-
+  var SaveState;
   document.getElementById("text").onload= function(){
     
     console.log(decodeURIComponent(document.cookie));
@@ -285,7 +285,8 @@ document.body.appendChild(el);
 
     console.log(document.getElementById("text").value);
 
-    document.cookie = "text=" + document.getElementById("text").value + ";";
+    SaveState = "text=" + document.getElementById("text").value + "; expires=Fri, 31 Dec 9999 23:59:59 GMT; SameSite=None; Secure;";
+    document.cookie = SaveState;
 
   }
 
