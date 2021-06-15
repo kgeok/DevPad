@@ -271,9 +271,11 @@ document.body.appendChild(el);
 </script>
 
 <script>
-  var version = "0.7";
+  var version = "0.8";
   var SaveState;
   var LoadState;
+  var ColorState;
+  var SizeState;
   window.onload= function(){
 
     LoadState = decodeURIComponent(document.cookie);
@@ -369,6 +371,7 @@ document.body.appendChild(el);
     if (size == "O"){
       console.log("O");
       document.getElementById("text").style.fontSize = '100%';
+      
       }
 
     if (size == "+"){
@@ -383,10 +386,14 @@ document.body.appendChild(el);
 
   }
 
+    SizeState = "size=" + document.getElementById("text").style.fontSize + "; expires=Fri, 31 Dec 9999 23:59:59 GMT; SameSite=None; Secure;";
+    //document.cookie = SizeState;
+
   }
   function fontcolor() {
     console.log("Changing to: " + document.getElementById("color").value);
     document.getElementById("text").style.color = document.getElementById("color").value;
+    ColorState = "color=" + document.getElementById("color").value + "; expires=Fri, 31 Dec 9999 23:59:59 GMT; SameSite=None; Secure;";
 
   }
 
@@ -402,6 +409,7 @@ document.body.appendChild(el);
 
     document.getElementById("text").value = "";
     document.cookie = "text=; expires=Thu, 01 Jan 1970 00:00:00 UTC; SameSite=None; Secure;";
+
 
   }
   
