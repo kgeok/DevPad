@@ -273,11 +273,15 @@ document.body.appendChild(el);
 <script>
   var version = "0.7";
   var SaveState;
+  var LoadState;
   window.onload= function(){
     
     console.log(decodeURIComponent(document.cookie));
 
-    document.getElementById("text").value = decodeURIComponent(document.cookie);
+    LoadState = decodeURIComponent(document.cookie);
+    LoadState.split("=").pop();
+
+    document.getElementById("text").value = LoadState;
 
   }
 
