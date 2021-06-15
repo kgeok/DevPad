@@ -275,12 +275,9 @@ document.body.appendChild(el);
   var SaveState;
   var LoadState;
   window.onload= function(){
-    
-    console.log(decodeURIComponent(document.cookie));
 
     LoadState = decodeURIComponent(document.cookie);
     LoadState.split("=").pop();
-
     document.getElementById("text").value = LoadState;
 
   }
