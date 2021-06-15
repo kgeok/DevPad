@@ -277,7 +277,7 @@ document.body.appendChild(el);
   window.onload= function(){
 
     LoadState = decodeURIComponent(document.cookie);
-    LoadState.split("=").pop();
+    LoadState = LoadState.split("=").pop();
     document.getElementById("text").value = LoadState;
 
   }
