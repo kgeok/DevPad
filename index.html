@@ -279,7 +279,9 @@ document.body.appendChild(el);
   window.onload= function(){
 
     LoadState = decodeURIComponent(document.cookie);
+    SizeState = decodeURIComponent(document.cookie);
     LoadState = LoadState.split("text=").pop();
+    SizeState = SizeState.split("size=").pop();
     document.getElementById("text").value = LoadState;
 
   }
@@ -387,7 +389,7 @@ document.body.appendChild(el);
   }
 
     SizeState = "size=" + document.getElementById("text").style.fontSize + "; expires=Fri, 31 Dec 9999 23:59:59 GMT; SameSite=None; Secure;";
-    //document.cookie = SizeState;
+    document.cookie = SizeState;
 
   }
   function fontcolor() {
