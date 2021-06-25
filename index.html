@@ -271,28 +271,21 @@ document.body.appendChild(el);
 </script>
 
 <script>
-  var version = "0.8";
-  var SaveState;
-  var LoadState;
-  var ColorState;
-  var SizeState;
-  window.onload= function(){
+  var version = "0.7";
 
-    LoadState = decodeURIComponent(document.cookie);
-    SizeState = decodeURIComponent(document.cookie);
-    LoadState = LoadState.split("text=").pop();
-    SizeState = SizeState.split("size=").pop();
-    document.getElementById("text").value = LoadState;
-    document.getElementById("text").style.fontSize = SizeState;
+  document.getElementById("text").onload= function(){
+    
+    console.log(decodeURIComponent(document.cookie));
+
+    document.getElementById("text").value = decodeURIComponent(document.cookie);
 
   }
 
-  document.getElementById("text").onkeyup= function(){
+  document.getElementById("text").onkeypress= function(){
 
     console.log(document.getElementById("text").value);
 
-    SaveState = "text=" + document.getElementById("text").value + "; expires=Fri, 31 Dec 9999 23:59:59 GMT; SameSite=None; Secure;";
-    document.cookie = SaveState;
+    document.cookie = "text=" + document.getElementById("text").value + ";";
 
   }
 
@@ -374,7 +367,6 @@ document.body.appendChild(el);
     if (size == "O"){
       console.log("O");
       document.getElementById("text").style.fontSize = '100%';
-      
       }
 
     if (size == "+"){
@@ -389,14 +381,10 @@ document.body.appendChild(el);
 
   }
 
-    SizeState = "size=" + document.getElementById("text").style.fontSize + "; expires=Fri, 31 Dec 9999 23:59:59 GMT; SameSite=None; Secure;";
-    document.cookie = SizeState;
-
   }
   function fontcolor() {
     console.log("Changing to: " + document.getElementById("color").value);
     document.getElementById("text").style.color = document.getElementById("color").value;
-    ColorState = "color=" + document.getElementById("color").value + "; expires=Fri, 31 Dec 9999 23:59:59 GMT; SameSite=None; Secure;";
 
   }
 
@@ -411,8 +399,6 @@ document.body.appendChild(el);
   function Clear(){
 
     document.getElementById("text").value = "";
-    document.cookie = "text=; expires=Thu, 01 Jan 1970 00:00:00 UTC; SameSite=None; Secure;";
-
 
   }
   
