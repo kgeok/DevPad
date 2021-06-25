@@ -27,6 +27,7 @@ background-color: grey;
 padding: 10px;
 margin:0 auto;
 vertical-align: middle;
+border-radius: 5px;
 
 }
 
@@ -282,8 +283,8 @@ document.body.appendChild(el);
     SizeState = decodeURIComponent(document.cookie);
     LoadState = LoadState.split("text=").pop();
     SizeState = SizeState.split("size=").pop();
-    document.getElementById("text").value = LoadState;
     document.getElementById("text").style.fontSize = SizeState;
+    document.getElementById("text").value = LoadState;
 
   }
 
