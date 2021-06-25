@@ -283,6 +283,7 @@ document.body.appendChild(el);
     LoadState = LoadState.split("text=").pop();
     SizeState = SizeState.split("size=").pop();
     document.getElementById("text").value = LoadState;
+    document.getElementById("text").style.fontSize = SizeState;
 
   }
 
