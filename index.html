@@ -280,6 +280,7 @@ document.body.appendChild(el);
 
     LoadState["Text"] = decodeURIComponent(document.cookie).split("text=").pop();
     LoadState["Size"] = decodeURIComponent(document.cookie).split("size=").pop();
+    LoadState["Size"] = LoadState["Size"].split(";").shift();
 
     document.getElementById("text").style.fontSize = LoadState["Size"];
     document.getElementById("text").value = LoadState["Text"];
@@ -290,8 +291,7 @@ document.body.appendChild(el);
 
     console.log(document.getElementById("text").value);
 
-    SaveState = "text=" + document.getElementById("text").value + "; expires=Fri, 31 Dec 9999 23:59:59 GMT; SameSite=None; Secure;";
-    document.cookie = SaveState;
+    document.cookie = "text=" + document.getElementById("text").value + "; expires=Fri, 31 Dec 9999 23:59:59 GMT; SameSite=None; Secure;";
 
   }
 
@@ -388,14 +388,14 @@ document.body.appendChild(el);
 
   }
 
-    SizeState = "size=" + document.getElementById("text").style.fontSize + "; expires=Fri, 31 Dec 9999 23:59:59 GMT; SameSite=None; Secure;";
-    document.cookie = SizeState;
+    document.cookie = "size=" + document.getElementById("text").style.fontSize + "; expires=Fri, 31 Dec 9999 23:59:59 GMT; SameSite=None; Secure;";
+    
 
   }
   function fontcolor() {
     console.log("Changing to: " + document.getElementById("color").value);
     document.getElementById("text").style.color = document.getElementById("color").value;
-    ColorState = "color=" + document.getElementById("color").value + "; expires=Fri, 31 Dec 9999 23:59:59 GMT; SameSite=None; Secure;";
+    document.cookie = "color=" + document.getElementById("color").value + "; expires=Fri, 31 Dec 9999 23:59:59 GMT; SameSite=None; Secure;";
 
   }
 
