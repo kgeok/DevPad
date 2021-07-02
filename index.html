@@ -245,7 +245,6 @@ body {
     <option>Multiply</option>
     <option>Divide</option>
     <option>Exponent</option>
-    <option>Memory Recall</option>
     </select>
     <script>
     
@@ -273,7 +272,7 @@ document.body.appendChild(el);
 </script>
 
 <script>
-  let release = "debug";
+  let release = "prod";
   let version = "0.9";
   var SaveState;
   var LoadState = new Object();
@@ -329,9 +328,7 @@ document.body.appendChild(el);
       for (i = 1; i < breaks + 1; i++){
       result = result + Number(infill[i]);
       }
-
-      prompt("Result", result);
-
+      document.getElementById("text").value = document.getElementById("text").value + "\n" + "\n" + result;
       break;
 
       case "Subtract":
@@ -340,7 +337,7 @@ document.body.appendChild(el);
       result = result - Number(infill[i]);
       }
 
-      prompt("Result", result);
+      document.getElementById("text").value = document.getElementById("text").value + "\n" + "\n" + result;
       break;
 
       case "Multiply":
@@ -349,7 +346,7 @@ document.body.appendChild(el);
       result = result * Number(infill[i]);
       }
 
-      prompt("Result", result);
+      document.getElementById("text").value = document.getElementById("text").value + "\n" + "\n" + result;
       break;
 
       case "Divide":
@@ -357,7 +354,8 @@ document.body.appendChild(el);
       for (i = 1; i < breaks + 1; i++){
       result = result / Number(infill[i]);
       }
-      prompt("Result", result);
+
+      document.getElementById("text").value = document.getElementById("text").value + "\n" + "\n" + result;
       break;
 
       case "Exponent":
@@ -365,11 +363,8 @@ document.body.appendChild(el);
       for (i = 1; i < breaks + 1; i++){
       result = result ** Number(infill[i]);
       }
-      prompt("Result", result);
-      break;
 
-      case "Memory Recall":
-      prompt("Result of Operation:" + operation, result);
+      document.getElementById("text").value = document.getElementById("text").value + "\n" + "\n" + result;
       break;
 
     default:
