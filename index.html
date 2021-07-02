@@ -274,17 +274,15 @@ document.body.appendChild(el);
 <script>
   var version = "0.8";
   var SaveState;
-  var LoadState;
-  var ColorState;
-  var SizeState;
+  var LoadState = new Object();
+
   window.onload= function(){
 
-    LoadState = decodeURIComponent(document.cookie);
-    SizeState = decodeURIComponent(document.cookie);
-    LoadState = LoadState.split("text=").pop();
-    SizeState = SizeState.split("size=").pop();
-    document.getElementById("text").style.fontSize = SizeState;
-    document.getElementById("text").value = LoadState;
+    LoadState["Text"] = decodeURIComponent(document.cookie).split("text=").pop();
+    LoadState["Size"] = decodeURIComponent(document.cookie).split("size=").pop();
+
+    document.getElementById("text").style.fontSize = LoadState["Size"];
+    document.getElementById("text").value = LoadState["Text"];
 
   }
 
