@@ -272,7 +272,8 @@ document.body.appendChild(el);
 </script>
 
 <script>
-  var version = "0.8";
+  let release = "prod";
+  let version = "0.9";
   var SaveState;
   var LoadState = new Object();
 
@@ -311,6 +312,7 @@ document.body.appendChild(el);
    var numbersString = document.getElementById('text').toString(10);
    var breaks = (numbers.match(/\n/g)||[]).length;
    var infill = numbers.split("\n");
+   var operation = cmd;
    var result;
 
   switch (cmd){
@@ -326,9 +328,7 @@ document.body.appendChild(el);
       for (i = 1; i < breaks + 1; i++){
       result = result + Number(infill[i]);
       }
-
-      prompt("Result", result);
-
+      document.getElementById("text").value = document.getElementById("text").value + "\n" + "\n" + result;
       break;
 
       case "Subtract":
@@ -337,7 +337,7 @@ document.body.appendChild(el);
       result = result - Number(infill[i]);
       }
 
-      prompt("Result", result);
+      document.getElementById("text").value = document.getElementById("text").value + "\n" + "\n" + result;
       break;
 
       case "Multiply":
@@ -346,7 +346,7 @@ document.body.appendChild(el);
       result = result * Number(infill[i]);
       }
 
-      prompt("Result", result);
+      document.getElementById("text").value = document.getElementById("text").value + "\n" + "\n" + result;
       break;
 
       case "Divide":
@@ -354,7 +354,8 @@ document.body.appendChild(el);
       for (i = 1; i < breaks + 1; i++){
       result = result / Number(infill[i]);
       }
-      prompt("Result", result);
+
+      document.getElementById("text").value = document.getElementById("text").value + "\n" + "\n" + result;
       break;
 
       case "Exponent":
@@ -362,7 +363,8 @@ document.body.appendChild(el);
       for (i = 1; i < breaks + 1; i++){
       result = result ** Number(infill[i]);
       }
-      prompt("Result", result);
+
+      document.getElementById("text").value = document.getElementById("text").value + "\n" + "\n" + result;
       break;
 
     default:
