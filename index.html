@@ -280,10 +280,14 @@ document.body.appendChild(el);
 
     LoadState["Text"] = decodeURIComponent(document.cookie).split("text=").pop();
     LoadState["Size"] = decodeURIComponent(document.cookie).split("size=").pop();
+    LoadState["Color"] = decodeURIComponent(document.cookie).split("color=").pop();
+    LoadState["Text"] = LoadState["Text"].split(";").shift();
     LoadState["Size"] = LoadState["Size"].split(";").shift();
-
+    LoadState["Color"] = LoadState["Color"].split(";").shift();
+    
     document.getElementById("text").style.fontSize = LoadState["Size"];
     document.getElementById("text").value = LoadState["Text"];
+    document.getElementById("color").value = LoadState["Color"];
 
   }
 
