@@ -27,6 +27,7 @@ background-color: grey;
 padding: 10px;
 margin:0 auto;
 vertical-align: middle;
+border-radius: 5px;
 
 }
 
@@ -271,27 +272,36 @@ document.body.appendChild(el);
 </script>
 
 <script>
-  var version = "0.7";
+  var version = "0.8";
+  var SaveState;
+  var LoadState = new Object();
 
-  document.getElementById("text").onload= function(){
+  window.onload= function(){
+
+    LoadState["Text"] = decodeURIComponent(document.cookie).split("text=").pop();
+    LoadState["Size"] = decodeURIComponent(document.cookie).split("size=").pop();
+    LoadState["Color"] = decodeURIComponent(document.cookie).split("color=").pop();
+    LoadState["Text"] = LoadState["Text"].split(";").shift();
+    LoadState["Size"] = LoadState["Size"].split(";").shift();
+    LoadState["Color"] = LoadState["Color"].split(";").shift();
     
-    console.log(decodeURIComponent(document.cookie));
-
-    document.getElementById("text").value = decodeURIComponent(document.cookie);
-
+    document.getElementById("text").style.fontSize = LoadState["Size"];
+    document.getElementById("text").value = LoadState["Text"];
+    document.getElementById("color").value = LoadState["Color"];
+    document.getElementById("text").style.color = LoadState["Color"];
   }
 
-  document.getElementById("text").onkeypress= function(){
+  document.getElementById("text").onkeyup= function(){
 
-    console.log(document.getElementById("text").value);
+   // console.log(document.getElementById("text").value);
 
-    document.cookie = "text=" + document.getElementById("text").value + ";";
+    document.cookie = "text=" + document.getElementById("text").value + "; expires=Fri, 31 Dec 9999 23:59:59 GMT; SameSite=None; Secure;";
 
   }
 
   function About()
   {
-  alert("DevPad, Version " + version + ", Created by Kevin George\n \n" + navigator.appName + " " +  navigator.appVersion);
+  prompt("DevPad, Version " + version + ", With <3 by Kevin George\n \n" + navigator.appName + " " +  navigator.appVersion, "http://kgeok.github.io");
   
   }
 
@@ -367,6 +377,7 @@ document.body.appendChild(el);
     if (size == "O"){
       console.log("O");
       document.getElementById("text").style.fontSize = '100%';
+      
       }
 
     if (size == "+"){
@@ -381,10 +392,14 @@ document.body.appendChild(el);
 
   }
 
+    document.cookie = "size=" + document.getElementById("text").style.fontSize + "; expires=Fri, 31 Dec 9999 23:59:59 GMT; SameSite=None; Secure;";
+    
+
   }
   function fontcolor() {
     console.log("Changing to: " + document.getElementById("color").value);
     document.getElementById("text").style.color = document.getElementById("color").value;
+    document.cookie = "color=" + document.getElementById("color").value + "; expires=Fri, 31 Dec 9999 23:59:59 GMT; SameSite=None; Secure;";
 
   }
 
@@ -399,6 +414,9 @@ document.body.appendChild(el);
   function Clear(){
 
     document.getElementById("text").value = "";
+    document.cookie = "text=; expires=Thu, 01 Jan 1970 00:00:00 UTC; SameSite=None; Secure;";
+    document.cookie = "color=; expires=Thu, 01 Jan 1970 00:00:00 UTC; SameSite=None; Secure;";
+    document.cookie = "size=; expires=Thu, 01 Jan 1970 00:00:00 UTC; SameSite=None; Secure;";
 
   }
   
