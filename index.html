@@ -146,6 +146,7 @@ body {
     <option selected>File</option>
     <option>Open</option>
     <option>Save</option>
+    <option>Print</option>
     <option>Refresh</option>
     <option>About</option>
     <option>Exit</option>
@@ -163,6 +164,11 @@ body {
     if (document.getElementById("file_menu").value == "Save"){
       Save();
     document.getElementById("file_menu").value = "File";
+    }
+
+    if (document.getElementById("file_menu").value == "Print"){
+      Print();
+    
     }
 
     if (document.getElementById("file_menu").value == "Refresh"){
@@ -188,6 +194,7 @@ body {
     <select id="edit_menu" name="edit_menu">
       <option selected>Edit</option>
       <option>Copy</option>
+      <option>Find and Replace</option>
       <option>Clear</option>
       </select>
       <script>
@@ -196,6 +203,11 @@ body {
   
       if (document.getElementById("edit_menu").value == "Copy"){
         Copy();
+      document.getElementById("edit_menu").value = "Edit";
+      }
+
+      if (document.getElementById("edit_menu").value == "Find and Replace"){
+        FindReplace();
       document.getElementById("edit_menu").value = "Edit";
       }
   
@@ -213,6 +225,7 @@ body {
   <option>Zoom In</option>
   <option>Standard</option>
   <option>Zoom Out</option>
+  <option>Full Screen</option>
   </select>
   <script>
   
@@ -233,7 +246,12 @@ body {
     fontsize("-")
   document.getElementById("view_menu").value = "View";
   }
-  
+
+
+ if (document.getElementById("view_menu").value == "Full Screen"){
+  document.documentElement.requestFullscreen()
+  document.getElementById("view_menu").value = "View";
+  }
 
   }
   </script>
@@ -273,7 +291,7 @@ document.body.appendChild(el);
 
 <script>
   let release = "prod";
-  let version = "0.9";
+  let version = "1.0";
   var SaveState;
   var LoadState = new Object();
 
@@ -374,6 +392,17 @@ document.body.appendChild(el);
   
   }
 
+  function FindReplace(){
+
+    inputf = prompt("Enter the Text to Find (RegEx Supported)");
+    inputr = prompt("Enter the Text to Replace With");
+
+    inputf = document.getElementById("text").value.match(inputf);
+
+    document.getElementById("text").value = document.getElementById("text").value.replace(inputf, inputr);
+
+  }
+
   function fontsize(size){
 
     if (size == "O"){
@@ -446,6 +475,14 @@ document.body.appendChild(el);
           document.body.appendChild(a);
           a.click();
           document.body.removeChild(a);
+  }
+
+  function Print(){
+
+    document.write(document.getElementById('text').value);
+    window.print();
+    location.reload();
+
   }
   
   function Compile()
