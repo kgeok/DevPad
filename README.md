@@ -1,5 +1,5 @@
 # DevPad
-A simple HTML/JS in-browser code and editor, calculator and compiler
+A simple text editor, HTML/JS in-browser code and editor, calculator and compiler
 
 Features:
 
