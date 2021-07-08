@@ -9,3 +9,5 @@ Features:
  - Content and Settings Save on close
 
 To use Calculator Function, each number should be placed on a new line and then select "Math" function
+
+Find and Replace function supports Regular Expressions
