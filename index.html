@@ -399,10 +399,18 @@ document.body.appendChild(el);
 
     inputf = prompt("Enter the Text to Find (RegEx Supported)");
     inputr = prompt("Enter the Text to Replace With");
-
+    
     inputf = document.getElementById("text").value.match(inputf);
+      
+    if (inputf == null){     
+    alert("Result not found");
+    }
+      
+    while (inputf != null){
 
     document.getElementById("text").value = document.getElementById("text").value.replace(inputf, inputr);
+        
+    }
 
   }
 
