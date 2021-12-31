@@ -199,6 +199,8 @@ body {
       <option>Copy</option>
       <option>Find and Replace</option>
       <option>Clear</option>
+	  <option>Upper Case</option>
+	  <option>Lower Case</option>
       </select>
       <script>
       
@@ -216,6 +218,14 @@ body {
   
       if (document.getElementById("edit_menu").value == "Clear"){
         Clear();
+      document.getElementById("edit_menu").value = "Edit";
+      }
+	 if (document.getElementById("edit_menu").value == "Upper Case"){
+        Upper();
+      document.getElementById("edit_menu").value = "Edit";
+      }
+	 if (document.getElementById("edit_menu").value == "Lower Case"){
+        Lower();
       document.getElementById("edit_menu").value = "Edit";
       }
       
@@ -294,7 +304,8 @@ document.body.appendChild(el);
 
 <script>
   let release = "prod";
-  let version = "1.0.1";
+  let version = "1.1";
+  //Adding localStorage model to LoadState and replacing cookies in a future release
   var SaveState;
   var LoadState = new Object();
 
@@ -315,9 +326,8 @@ document.body.appendChild(el);
 
   document.getElementById("text").onkeyup= function(){
 
-   // console.log(document.getElementById("text").value);
-
     document.cookie = "text=" + document.getElementById("text").value + "; expires=Fri, 31 Dec 9999 23:59:59 GMT; SameSite=None; Secure;";
+	localStorage.setItem("text", document.getElementById("text").value);
 
   }
 
@@ -399,18 +409,23 @@ document.body.appendChild(el);
 
     inputf = prompt("Enter the Text to Find (RegEx Supported)");
     inputr = prompt("Enter the Text to Replace With");
+	
+	inputBuffer = inputf;
+	console.log(inputBuffer);
     
     inputf = document.getElementById("text").value.match(inputf);
       
     if (inputf == null){     
-    alert("Result not found");
+    alert("Result not found.");
     }
       
-    while (inputf != null){
-
+	while (inputf != null){
     document.getElementById("text").value = document.getElementById("text").value.replace(inputf, inputr);
+	
+	inputf = document.getElementById("text").value.match(inputBuffer);
         
     }
+	
 
   }
 
@@ -435,6 +450,7 @@ document.body.appendChild(el);
   }
 
     document.cookie = "size=" + document.getElementById("text").style.fontSize + "; expires=Fri, 31 Dec 9999 23:59:59 GMT; SameSite=None; Secure;";
+	localStorage.setItem("size", document.getElementById("text").style.fontSize);
     
 
   }
@@ -442,6 +458,7 @@ document.body.appendChild(el);
     console.log("Changing to: " + document.getElementById("color").value);
     document.getElementById("text").style.color = document.getElementById("color").value;
     document.cookie = "color=" + document.getElementById("color").value + "; expires=Fri, 31 Dec 9999 23:59:59 GMT; SameSite=None; Secure;";
+	localStorage.setItem("color", document.getElementById("color").value);
 
   }
 
@@ -459,7 +476,21 @@ document.body.appendChild(el);
     document.cookie = "text=; expires=Thu, 01 Jan 1970 00:00:00 UTC; SameSite=None; Secure;";
     document.cookie = "color=; expires=Thu, 01 Jan 1970 00:00:00 UTC; SameSite=None; Secure;";
     document.cookie = "size=; expires=Thu, 01 Jan 1970 00:00:00 UTC; SameSite=None; Secure;";
+	localStorage.setItem("text", "");
+	localStorage.setItem("color", "");
+	localStorage.setItem("size", "");
+	
 
+  }
+  
+  function Upper(){
+  
+  document.getElementById("text").value = document.getElementById("text").value.toUpperCase();
+  
+  }
+  
+  function Lower(){
+  document.getElementById("text").value = document.getElementById("text").value.toLowerCase();
   }
   
   function ImportFile(){
