@@ -269,20 +269,21 @@ body {
   }
   </script>
 
-  <select id="math_picker" name="math_picker">
-    <option>Math</option>
+  <select id="op_picker" name="op_picker">
+    <option>Operations</option>
     <option>Add</option>
     <option>Subtract</option>
     <option>Multiply</option>
     <option>Divide</option>
     <option>Exponent</option>
+	<option>Compile</option>
     </select>
     <script>
     
-    document.getElementById("math_picker").onchange = function(){
-    operation = document.getElementById("math_picker").value;
+    document.getElementById("op_picker").onchange = function(){
+    operation = document.getElementById("op_picker").value;
     MathCmd(operation);
-    document.getElementById("math_picker").value = "Math";
+    document.getElementById("op_picker").value = "Operations";
     }
     
     </script>
@@ -304,31 +305,21 @@ document.body.appendChild(el);
 
 <script>
   let release = "prod";
-  let version = "1.1";
+  let version = "1.2";
   //Adding localStorage model to LoadState and replacing cookies in a future release
   var SaveState;
   var LoadState = new Object();
 
   window.onload= function(){
-
-    LoadState["Text"] = decodeURIComponent(document.cookie).split("text=").pop();
-    LoadState["Size"] = decodeURIComponent(document.cookie).split("size=").pop();
-    LoadState["Color"] = decodeURIComponent(document.cookie).split("color=").pop();
-    LoadState["Text"] = LoadState["Text"].split(";").shift();
-    LoadState["Size"] = LoadState["Size"].split(";").shift();
-    LoadState["Color"] = LoadState["Color"].split(";").shift();
     
-    document.getElementById("text").style.fontSize = LoadState["Size"];
-    document.getElementById("text").value = LoadState["Text"];
-    document.getElementById("color").value = LoadState["Color"];
-    document.getElementById("text").style.color = LoadState["Color"];
+    document.getElementById("text").style.fontSize = localStorage.getItem('size');
+    document.getElementById("text").value = localStorage.getItem('text');
+    document.getElementById("color").value = localStorage.getItem('color');
+    document.getElementById("text").style.color = localStorage.getItem('color');
   }
 
   document.getElementById("text").onkeyup= function(){
-
-    document.cookie = "text=" + document.getElementById("text").value + "; expires=Fri, 31 Dec 9999 23:59:59 GMT; SameSite=None; Secure;";
 	localStorage.setItem("text", document.getElementById("text").value);
-
   }
 
   function About()
@@ -397,6 +388,10 @@ document.body.appendChild(el);
 
       document.getElementById("text").value = document.getElementById("text").value + "\n" + "\n" + result;
       break;
+	  
+	  case "Compile":
+	  
+	  Compile();
 
     default:
       
