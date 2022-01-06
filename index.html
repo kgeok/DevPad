@@ -199,8 +199,8 @@ body {
       <option>Copy</option>
       <option>Find and Replace</option>
       <option>Clear</option>
-	  <option>Upper Case</option>
-	  <option>Lower Case</option>
+      <option>Upper Case</option>
+      <option>Lower Case</option>
       </select>
       <script>
       
@@ -269,29 +269,29 @@ body {
   }
   </script>
 
-  <select id="math_picker" name="math_picker">
-    <option>Math</option>
+  <select id="op_picker" name="op_picker">
+    <option>Operations</option>
     <option>Add</option>
     <option>Subtract</option>
     <option>Multiply</option>
     <option>Divide</option>
     <option>Exponent</option>
+    <option>Compile</option>
     </select>
     <script>
     
-    document.getElementById("math_picker").onchange = function(){
-    operation = document.getElementById("math_picker").value;
-    MathCmd(operation);
-    document.getElementById("math_picker").value = "Math";
+    document.getElementById("op_picker").onchange = function(){
+    operation = document.getElementById("op_picker").value;
+    OpCmd(operation);
+    document.getElementById("op_picker").value = "Operations";
     }
     
     </script>
 
-    <input type="color" id='color' onblur='fontcolor()' >
-    <input type="button" value="Compile" onclick="Compile()"/></input>
+    <input type="color" id='color' onblur='fontcolor()'>
 </section>
 <br/>
-<textarea autofocus ="true" name="text" rows="45" cols="80" id="text"></textarea>
+<textarea autofocus ="true" name="text" rows="50" cols="90" id="text"></textarea>
 
 <script type="module">
 
@@ -304,31 +304,20 @@ document.body.appendChild(el);
 
 <script>
   let release = "prod";
-  let version = "1.1";
-  //Adding localStorage model to LoadState and replacing cookies in a future release
+  let version = "1.2";
   var SaveState;
   var LoadState = new Object();
 
   window.onload= function(){
-
-    LoadState["Text"] = decodeURIComponent(document.cookie).split("text=").pop();
-    LoadState["Size"] = decodeURIComponent(document.cookie).split("size=").pop();
-    LoadState["Color"] = decodeURIComponent(document.cookie).split("color=").pop();
-    LoadState["Text"] = LoadState["Text"].split(";").shift();
-    LoadState["Size"] = LoadState["Size"].split(";").shift();
-    LoadState["Color"] = LoadState["Color"].split(";").shift();
     
-    document.getElementById("text").style.fontSize = LoadState["Size"];
-    document.getElementById("text").value = LoadState["Text"];
-    document.getElementById("color").value = LoadState["Color"];
-    document.getElementById("text").style.color = LoadState["Color"];
+    document.getElementById("text").style.fontSize = localStorage.getItem('size');
+    document.getElementById("text").value = localStorage.getItem('text');
+    document.getElementById("color").value = localStorage.getItem('color');
+    document.getElementById("text").style.color = localStorage.getItem('color');
   }
 
   document.getElementById("text").onkeyup= function(){
-
-    document.cookie = "text=" + document.getElementById("text").value + "; expires=Fri, 31 Dec 9999 23:59:59 GMT; SameSite=None; Secure;";
 	localStorage.setItem("text", document.getElementById("text").value);
-
   }
 
   function About()
@@ -337,7 +326,7 @@ document.body.appendChild(el);
   
   }
 
-  function MathCmd(cmd){
+  function OpCmd(cmd){
   
    var numbers = document.getElementById('text').value;
    var numbersString = document.getElementById('text').toString(10);
@@ -348,7 +337,7 @@ document.body.appendChild(el);
 
   switch (cmd){
 
-    case "Math":
+    case "Operations":
 
     //alert("To use the Math Function, enter each number seperated by line and select which operation you want to use.");
 
@@ -397,9 +386,11 @@ document.body.appendChild(el);
 
       document.getElementById("text").value = document.getElementById("text").value + "\n" + "\n" + result;
       break;
+	  
+      case "Compile":
+      Compile();
 
     default:
-      
       break;
   }
   
@@ -426,7 +417,6 @@ document.body.appendChild(el);
         
     }
 	
-
   }
 
   function fontsize(size){
@@ -449,15 +439,12 @@ document.body.appendChild(el);
 
   }
 
-    document.cookie = "size=" + document.getElementById("text").style.fontSize + "; expires=Fri, 31 Dec 9999 23:59:59 GMT; SameSite=None; Secure;";
 	localStorage.setItem("size", document.getElementById("text").style.fontSize);
     
-
   }
   function fontcolor() {
     console.log("Changing to: " + document.getElementById("color").value);
     document.getElementById("text").style.color = document.getElementById("color").value;
-    document.cookie = "color=" + document.getElementById("color").value + "; expires=Fri, 31 Dec 9999 23:59:59 GMT; SameSite=None; Secure;";
 	localStorage.setItem("color", document.getElementById("color").value);
 
   }
@@ -473,18 +460,13 @@ document.body.appendChild(el);
   function Clear(){
 
     document.getElementById("text").value = "";
-    document.cookie = "text=; expires=Thu, 01 Jan 1970 00:00:00 UTC; SameSite=None; Secure;";
-    document.cookie = "color=; expires=Thu, 01 Jan 1970 00:00:00 UTC; SameSite=None; Secure;";
-    document.cookie = "size=; expires=Thu, 01 Jan 1970 00:00:00 UTC; SameSite=None; Secure;";
-	localStorage.setItem("text", "");
-	localStorage.setItem("color", "");
-	localStorage.setItem("size", "");
+    localStorage.setItem("text", "");
+    localStorage.setItem("color", "");
+    localStorage.setItem("size", "");
 	
-
   }
   
   function Upper(){
-  
   document.getElementById("text").value = document.getElementById("text").value.toUpperCase();
   
   }
@@ -494,7 +476,6 @@ document.body.appendChild(el);
   }
   
   function ImportFile(){
-  
   console.log(document.getElementById("fileSelect").files);
   let Parser = new FileReader();
   
@@ -507,7 +488,6 @@ document.body.appendChild(el);
   }
   
   function Save(){
-  
       var a = document.createElement("a");
             a.href = URL.createObjectURL(new Blob([document.getElementById('text').value], {
             type: "application/text"
@@ -520,15 +500,13 @@ document.body.appendChild(el);
   }
 
   function Print(){
-
     document.write(document.getElementById('text').value);
     window.print();
     location.reload();
 
   }
   
-  function Compile()
-  {
+  function Compile(){
   alert("To return, please refresh the page");
   document.write(document.getElementById('text').value);
   }
