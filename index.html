@@ -8,16 +8,8 @@
 <link rel="shortcut icon" href="https://github.com/kgeok/DevPad/raw/master/icons/favicon.ico">
 <meta name="msapplication-TileColor" content="#da532c">
 <meta name="msapplication-config" content="https://github.com/kgeok/DevPad/raw/master/icons/browserconfig.xml">
+<link rel="canonical" href="https://kgeok.github.io/DevPad/" />
 <meta name="theme-color" content="#ffffff">
-<script type="module">
-
-import 'https://cdn.jsdelivr.net/npm/@pwabuilder/pwaupdate';
-
-const elpwa = document.createElement('pwa-update');
-document.body.appendChild(elpwa);
-
-
-</script>
 <style type="text/css">
 
 noscript {
@@ -164,6 +156,11 @@ body {
     <option>Exit</option>
     </select>
     <script>
+
+    if (navigator.serviceWorker) {
+        navigator.serviceWorker.register('/DevPad/pwabuilder-sw.js', {scope: '/DevPad/'})
+      }
+
     
     document.getElementById("file_menu").onchange = function(){
 
@@ -302,14 +299,7 @@ body {
 <br/>
 <textarea autofocus ="true" name="text" rows="50" cols="90" id="text"></textarea>
 
-<script type="module">
 
-import 'https://cdn.jsdelivr.net/npm/@pwabuilder/pwaupdate';
-
-const el = document.createElement('pwa-update');
-document.body.appendChild(el);
-
-</script>
 
 <script>
   let release = "dev";
