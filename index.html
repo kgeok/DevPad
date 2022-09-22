@@ -8,6 +8,7 @@
 <link rel="shortcut icon" href="https://github.com/kgeok/DevPad/raw/master/icons/favicon.ico">
 <meta name="msapplication-TileColor" content="#da532c">
 <meta name="msapplication-config" content="https://github.com/kgeok/DevPad/raw/master/icons/browserconfig.xml">
+<link rel="canonical" href="https://kgeok.github.io/DevPad/" />
 <meta name="theme-color" content="#ffffff">
 <style type="text/css">
 
@@ -155,6 +156,11 @@ body {
     <option>Exit</option>
     </select>
     <script>
+
+    if (navigator.serviceWorker) {
+        navigator.serviceWorker.register('/DevPad/pwabuilder-sw.js', {scope: '/DevPad/'})
+      }
+
     
     document.getElementById("file_menu").onchange = function(){
 
@@ -201,6 +207,7 @@ body {
       <option>Clear</option>
       <option>Upper Case</option>
       <option>Lower Case</option>
+      <option>Insert Date</option>
       </select>
       <script>
       
@@ -226,6 +233,11 @@ body {
       }
 	 if (document.getElementById("edit_menu").value == "Lower Case"){
         Lower();
+      document.getElementById("edit_menu").value = "Edit";
+      }
+
+      if (document.getElementById("edit_menu").value == "Insert Date"){
+        DateTime();
       document.getElementById("edit_menu").value = "Edit";
       }
       
@@ -293,18 +305,11 @@ body {
 <br/>
 <textarea autofocus ="true" name="text" rows="50" cols="90" id="text"></textarea>
 
-<script type="module">
 
-import 'https://cdn.jsdelivr.net/npm/@pwabuilder/pwaupdate';
-
-const el = document.createElement('pwa-update');
-document.body.appendChild(el);
-
-</script>
 
 <script>
   let release = "prod";
-  let version = "1.2";
+  let version = "1.3";
   var SaveState;
   var LoadState = new Object();
 
@@ -394,6 +399,14 @@ document.body.appendChild(el);
       break;
   }
   
+  }
+
+  function DateTime(){
+
+    var datetime = new Date();
+
+    document.getElementById("text").value = document.getElementById("text").value + "\n" + "\n" + datetime;
+
   }
 
   function FindReplace(){
