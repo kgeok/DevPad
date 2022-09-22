@@ -207,6 +207,7 @@ body {
       <option>Clear</option>
       <option>Upper Case</option>
       <option>Lower Case</option>
+      <option>Insert Date</option>
       </select>
       <script>
       
@@ -232,6 +233,11 @@ body {
       }
 	 if (document.getElementById("edit_menu").value == "Lower Case"){
         Lower();
+      document.getElementById("edit_menu").value = "Edit";
+      }
+
+      if (document.getElementById("edit_menu").value == "Insert Date"){
+        DateTime();
       document.getElementById("edit_menu").value = "Edit";
       }
       
@@ -302,7 +308,7 @@ body {
 
 
 <script>
-  let release = "dev";
+  let release = "prod";
   let version = "1.3";
   var SaveState;
   var LoadState = new Object();
@@ -393,6 +399,14 @@ body {
       break;
   }
   
+  }
+
+  function DateTime(){
+
+    var datetime = new Date();
+
+    document.getElementById("text").value = document.getElementById("text").value + "\n" + "\n" + datetime;
+
   }
 
   function FindReplace(){
